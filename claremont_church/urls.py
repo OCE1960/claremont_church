@@ -21,11 +21,12 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from cms.views.api.users import  router
+from cms.admin import cms_admin_site
 
 
 urlpatterns = [
     path('cms/', include('cms.urls')),
-    path('admin/', admin.site.urls),
+    path('admin/', cms_admin_site.urls),
     path('rest/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls')),
     path('', RedirectView.as_view(url='cms/', permanent=True)),

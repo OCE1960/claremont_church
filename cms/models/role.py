@@ -2,7 +2,7 @@ from django.db import models
 from django.utils import timezone
 
 class Role(models.Model):
-    key = models.CharField(max_length=50)
+    key = models.CharField(max_length=50, unique=True)
     label = models.CharField(max_length=50)
     status = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)

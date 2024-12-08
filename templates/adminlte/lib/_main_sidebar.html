@@ -1,0 +1,23 @@
+{% extends 'adminlte/lib/_main_sidebar.html' %}
+{% load adminlte_helpers %}
+{%load static %}
+
+{% block logo %}
+        <a href="/" class="brand-link">
+            <img src="{%static 'admin-lte/dist/img/AdminLTELogo.png' %}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+            {% block logo_text %}<span class="brand-text font-weight-light">CMS</span>{% endblock %}
+        </a>
+{% endblock %}
+
+{% block nav_links %}
+    <li>
+        <a href="/some/url">
+            <i class="fa fa-dashboard"></i> <span>Home</span>
+        </a>
+    </li>
+    <li>
+        <a href="/some/url">
+            <i class="fa fa-user"></i> <span>Users</span>
+        </a>
+    </li>
+{% endblock nav_links %}

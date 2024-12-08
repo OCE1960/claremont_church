@@ -1,0 +1,20 @@
+select {
+    background-color: #e7e3df !important;
+    padding: 5px !important;
+  }
+
+.sidebar-nav {
+    margin-top: 20px;
+    padding: 0;
+    list-style: none;
+}
+
+input.vDateField {
+    padding: 5px !important;
+    width: 40%;
+}
+
+input.vTextField {
+  width: 70%;
+  padding: 5px;
+}

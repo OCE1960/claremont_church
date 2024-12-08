@@ -32,12 +32,19 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    "django.contrib.admin",
+    'cms.apps.CmsConfig',
+    'adminlte3',
+    'adminlte3_theme',
+    'rest_framework',
+    # "django.contrib.admin",
+    'claremont_church.apps.MyAdminConfig',
+    'django_celery_results',
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    'django_summernote',
 ]
 
 MIDDLEWARE = [
@@ -57,7 +64,9 @@ ROOT_URLCONF = "claremont_church.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [
+                BASE_DIR / "templates"
+            ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -100,6 +109,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     {
         "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+        "OPTIONS": {
+            "min_length": 8,
+        },
     },
     {
         "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
@@ -126,6 +138,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = "static/"
+
+PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -168,4 +186,23 @@ LOGGING = {
             "propagate": False,
         },
     },
+}
+
+AUTH_USER_MODEL = "cms.User"
+
+SUMMERNOTE_THEME = 'bs4'  # Show summernote with Bootstrap4
+
+# Celery Configuration Options
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60
+CELERY_RESULT_PERSISTENT = True
+CELERY_RESULT_BACKEND = "rpc://"
+CELERY_CACHE_BACKEND = 'django-cache'
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
 }

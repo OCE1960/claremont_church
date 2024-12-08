@@ -1,0 +1,53 @@
+<nav class="navbar navbar-expand-lg navbar-dark  bg-primary">
+        <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'cms:index' %}">CHURCH@Claremont</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'cms:index' %}"href="#">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="#">About Us</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="#">Contact Us</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Message and Music
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#">Listen to a Message</a></li>
+                <li><a class="dropdown-item" href="#">Listen to Life Stories</a></li>
+                <li><a class="dropdown-item" href="#">Listen to Music</a></li>
+                <li><a class="dropdown-item" href="#">Watch a Music Video</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="#">Church Q&A</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="#">Claremont House</a>
+            </li>
+            {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{% url 'admin:index' %}">Admin Page</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{% url 'admin:login'%}?next={{request.path}}">Login</a>
+                </li>
+            {% endif %}
+            </ul>
+            {% if  user.is_authenticated %}
+                <form class="d-flex" role="logout" id="logout-form" method="post" action="{% url 'admin:logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-info btn-sm"> Log out</button>
+                </form>
+            {% endif %}
+        </div>
+        </div>
+</nav>

@@ -64,7 +64,7 @@ class User(AbstractBaseUser):
     REQUIRED_FIELDS = ["date_of_birth", "first_name", "last_name", "roles"]
 
     def __str__(self):
-        return f"{self.full_name} - {self.email}"
+        return f"{self.full_name}"
 
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"
@@ -84,5 +84,7 @@ class User(AbstractBaseUser):
     
     @property
     def full_name(self):
-        # User Full Name 
-        return f"{self.first_name} {self.middle_name} {self.last_name}"
+        if self.middle_name:
+            return f"{self.first_name} {self.middle_name} {self.last_name}"
+        
+        return f"{self.first_name} {self.last_name}"

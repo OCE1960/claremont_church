@@ -8,4 +8,4 @@ class Category(models.Model):
     updated_at = models.DateTimeField(auto_now=True, editable=False)
     
     def __str__(self):
-        return f"{self.key} - {self.status}"
+        return self.key

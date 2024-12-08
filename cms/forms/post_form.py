@@ -35,7 +35,7 @@ class PostAdmin(admin.ModelAdmin):
     form = PostChangeForm
     add_form = PostCreationForm
     fieldsets = [
-        (None, {"fields": ["title", "content", "status", "attachment"]}),
+        (None, {"fields": ["category", "title", "content", "status", "attachment"]}),
     ]
     list_display = ["title", "status", "attachment", "updated_at", "created_at"]
     list_filter = ["title", "status"]

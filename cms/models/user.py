@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
-from django.utils import timezone
 
 from cms.models.role import Role
 
@@ -55,8 +54,8 @@ class User(AbstractBaseUser):
     middle_name = models.CharField(blank=True, null=True, max_length=60, default=None)
     last_name = models.CharField(max_length=60, default=None)
     roles = models.ManyToManyField(Role, through='RoleUser')
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(default=timezone.now)
+    created_at = models.DateTimeField(auto_now_add=True, editable=False)
+    updated_at = models.DateTimeField(auto_now=True, editable=False)
     
 
     objects = UserManager()

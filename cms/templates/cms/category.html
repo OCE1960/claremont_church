@@ -1,0 +1,15 @@
+{% extends "cms/base_generic.html" %}
+
+{% block content %}
+  <form action="{% url 'cms:category' %}" method="post">
+    {% csrf_token %}
+    {% for field in form %}
+        <div class="mb-5 mt-5">
+            {{ field.errors }}
+            <label for="exampleInputEmail1" class="form-label">{{ field.label_tag }} </label>
+            {{ field }}
+        </div>
+    {% endfor %}
+    <input type="submit" value="Submit">
+  </form>
+{% endblock %}

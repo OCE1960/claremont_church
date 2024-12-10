@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import os
 import sys
+from django.forms.renderers import TemplatesSetting
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -46,6 +48,7 @@ if not TESTING:
         # "django.contrib.admin",
         'claremont_church.apps.MyAdminConfig',
         "debug_toolbar",
+        'django.forms',
         'django_celery_results',
         "django.contrib.auth",
         "django.contrib.contenttypes",
@@ -221,3 +224,11 @@ LOGOUT_REDIRECT_URL = "/cms/"
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
+
+LOGIN_URL = "/cms/"
+
+# class CustomFormRenderer(TemplatesSetting):
+#     form_template_name = 'form_template.html'
+    
+
+# FORM_RENDERER = "claremont_church.settings.CustomFormRenderer"

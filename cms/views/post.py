@@ -16,7 +16,7 @@ def index(request, pk):
 class PostDetailView(DetailView):
     context_object_name = "post"
     template_name = "cms/post.html"
-    queryset = Post.objects.all()
+    # queryset = Post.objects.all()
     
-    # def get_queryset(self):
-    #      return get_object_or_404(Post, id=self.kwargs["pk"])
+    def get_queryset(self):
+         return Post.objects.all()

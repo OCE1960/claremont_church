@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
+import sys
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,38 +27,46 @@ SECRET_KEY = "django-insecure-7-xn^h=eqf1fs671pjdq582&fq0(hm%va#@^==2dq7!&ovv0=&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "testserver",
+    'localhost',
+]
 
 
 # Application definition
+TESTING = "test" in sys.argv
 
-INSTALLED_APPS = [
-    'cms.apps.CmsConfig',
-    'adminlte3',
-    'adminlte3_theme',
-    'rest_framework',
-    # "django.contrib.admin",
-    'claremont_church.apps.MyAdminConfig',
-    'django_celery_results',
-    "django.contrib.auth",
-    "django.contrib.contenttypes",
-    "django.contrib.sessions",
-    "django.contrib.messages",
-    "django.contrib.staticfiles",
-    'django_summernote',
-]
+if not TESTING:
 
-MIDDLEWARE = [
-    "django.middleware.security.SecurityMiddleware",
-    "django.middleware.cache.UpdateCacheMiddleware",
-    "django.contrib.sessions.middleware.SessionMiddleware",
-    "django.middleware.common.CommonMiddleware",
-    "django.middleware.cache.FetchFromCacheMiddleware",
-    "django.middleware.csrf.CsrfViewMiddleware",
-    "django.contrib.auth.middleware.AuthenticationMiddleware",
-    "django.contrib.messages.middleware.MessageMiddleware",
-    "django.middleware.clickjacking.XFrameOptionsMiddleware",
-]
+    INSTALLED_APPS = [
+        'cms.apps.CmsConfig',
+        'adminlte3',
+        'adminlte3_theme',
+        'rest_framework',
+        # "django.contrib.admin",
+        'claremont_church.apps.MyAdminConfig',
+        "debug_toolbar",
+        'django_celery_results',
+        "django.contrib.auth",
+        "django.contrib.contenttypes",
+        "django.contrib.sessions",
+        "django.contrib.messages",
+        "django.contrib.staticfiles",
+        'django_summernote',
+    ]
+
+    MIDDLEWARE = [
+        "debug_toolbar.middleware.DebugToolbarMiddleware",
+        "django.middleware.security.SecurityMiddleware",
+        "django.middleware.cache.UpdateCacheMiddleware",
+        "django.contrib.sessions.middleware.SessionMiddleware",
+        "django.middleware.common.CommonMiddleware",
+        "django.middleware.cache.FetchFromCacheMiddleware",
+        "django.middleware.csrf.CsrfViewMiddleware",
+        "django.contrib.auth.middleware.AuthenticationMiddleware",
+        "django.contrib.messages.middleware.MessageMiddleware",
+        "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    ]
 
 ROOT_URLCONF = "claremont_church.urls"
 
@@ -206,3 +215,9 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
+
+LOGOUT_REDIRECT_URL = "/cms/"
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]

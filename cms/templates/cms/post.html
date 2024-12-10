@@ -1,8 +1,6 @@
 {% extends "cms/base_generic.html" %}
 
 {% block content %}
-  <h1>Local Library Post Page</h1>
-
-
-  <p>You have visited this page {{ num_visits }} time{{ num_visits|pluralize }}.</p>
+  <h1>{{ post.id }} - {{ post.title }}</h1>
+  {{ post.content|safe }}
 {% endblock %}

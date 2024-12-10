@@ -14,7 +14,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
+from debug_toolbar.toolbar import debug_toolbar_urls
 from django.urls import include, path
 from django.views.generic import RedirectView
 from django.conf import settings
@@ -23,12 +23,16 @@ from django.conf.urls.static import static
 from cms.views.api.users import  router
 from cms.admin import cms_admin_site
 
-
-urlpatterns = [
-    path('cms/', include('cms.urls')),
-    path('admin/', cms_admin_site.urls),
-    path('rest/', include(router.urls)),
-    path('api-auth/', include('rest_framework.urls')),
-    path('', RedirectView.as_view(url='cms/', permanent=True)),
-    path('summernote/', include('django_summernote.urls')),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if not settings.TESTING:
+    urlpatterns = [
+        path('cms/', include('cms.urls')),
+        path('admin/', cms_admin_site.urls),
+        path('rest/', include(router.urls)),
+        path('api-auth/', include('rest_framework.urls')),
+        path('', RedirectView.as_view(url='cms/', permanent=True)),
+        path('summernote/', include('django_summernote.urls')),
+    ]
+    
+    urlpatterns += debug_toolbar_urls()
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 

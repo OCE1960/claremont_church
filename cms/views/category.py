@@ -11,6 +11,7 @@ from cms.forms.category_form import CategoryCreationForm
 class CategoryView(View):
     template_name = "cms/category.html"
     form_class = CategoryCreationForm
+    context_object_name = "categories"
     
     def get(self, request, *args, **kwargs):
         form = self.form_class()

@@ -1,6 +1,11 @@
 {% extends "cms/base_generic.html" %}
 
 {% block content %}
+  {% for user in users %}
+  <div class="mb-3 mt-5">
+      {{ user.first_name }} - {{ user.email }}
+  </div>
+  {% endfor %}
   <h1>{{ post.id }} - {{ post.title }}</h1>
   {{ post.content|safe }}
 {% endblock %}

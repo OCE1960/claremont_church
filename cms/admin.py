@@ -1,11 +1,9 @@
 from django.contrib import admin
-from django.contrib.auth.models import Group
-from django_summernote.admin import SummernoteModelAdmin
 
-from cms.forms.category_form import CategoryAdmin
-from cms.forms.role_form import RoleAdmin
-from cms.forms.user_form import UserAdmin
-from cms.forms.post_form import PostAdmin
+from cms.model_admins.category_admin import CategoryAdmin
+from cms.model_admins.role_admin import RoleAdmin
+from cms.model_admins.user_admin import UserAdmin
+from cms.model_admins.post_admin import PostAdmin
 from cms.models.category import Category
 from cms.models.user import User
 from cms.models.post import Post

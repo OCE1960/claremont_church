@@ -5,7 +5,7 @@ from django.views import View
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from cms.models import Category
-from cms.forms.category_form import CategoryCreationForm
+from cms.model_admins.category_admin import CategoryCreationForm
 
 @method_decorator(login_required, name="dispatch")
 class CategoryView(View):

@@ -2,7 +2,7 @@ from django import forms
 from django.contrib import admin
 
 from ..models import Role
-from .role_user_form import RoleUserInline 
+from .role_user_admin import RoleUserInline 
 
 
 class RoleCreationForm(forms.ModelForm):
